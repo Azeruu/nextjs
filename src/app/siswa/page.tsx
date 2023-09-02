@@ -46,7 +46,7 @@ const Siswa = async () => {
               <td>{siswa.Nama}</td>
               <td>{siswa.jalur.nama_jalur}</td>
               <td>{siswa.telepon}</td>
-              <td>Action</td>
+              <td>{siswa.jalur.id}</td>
             </tr>
           ))}
         </tbody>
