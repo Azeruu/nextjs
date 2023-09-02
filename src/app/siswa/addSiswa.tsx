@@ -3,22 +3,20 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import type { Jalur, Siswa, User } from "@prisma/client";
-import { PrismaClient } from "@prisma/client";
+import type { Jalur, Siswa } from "@prisma/client";
 
 const AddSiswa = (
   { jalur }: { jalur: Jalur[] },
 ) => {
   const [isOpen, setIsOpen] = useState(false);
   const { register, handleSubmit } = useForm<Siswa>();
-
-  const prisma = new PrismaClient();
+  
   const Router = useRouter();
+
   const onSubmit = async (data :Siswa) => {
     try {
       const response = await axios.post('/api/siswa', data);
-
-      alert(JSON.stringify(response.data))
+      console.log("Data Berhasil di input : ", response.data);
     } catch (e) {
       console.log("error dalam submit data :", e)      
     }
@@ -29,6 +27,7 @@ const AddSiswa = (
   const handleModal = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <div>
       <button className="btn" onClick={handleModal}>
@@ -61,17 +60,19 @@ const AddSiswa = (
               <select
                 className="select select-bordered"
                 {...register("Jalur", { required: true })}
+                {...register("id_jalur", { required: true })}
               >
                 <option value="" disabled>
                   Pilih Jalur Pendaftaran
                 </option>
                 {jalur.map((jalur) => (
-                  <option value={jalur.nama_jalur} key={jalur.id}>
+                  <option value={jalur.id} key={jalur.id}>
                     {jalur.nama_jalur}
                   </option>
                 ))}
               </select>
             </div>
+            
             <div className="form-control w-full">
               <label className="label font-bold">Nomor Handphone</label>
               <input

@@ -8,9 +8,10 @@ const getSiswa = async () => {
       id: true,
       NISN: true,
       Nama: true,
-      telepon: true,
       jalur:true,
+      telepon: true,
       id_jalur: true,
+      id_user:true
     },
   });
   return res;
@@ -43,8 +44,8 @@ const Siswa = async () => {
               <td>{index +1}</td>
               <td>{siswa.NISN}</td>
               <td>{siswa.Nama}</td>
-              <td>{siswa.telepon}</td>
               <td>{siswa.jalur.nama_jalur}</td>
+              <td>{siswa.telepon}</td>
               <td>Action</td>
             </tr>
           ))}
